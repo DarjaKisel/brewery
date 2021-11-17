@@ -2,6 +2,7 @@ package com.dzinevich.brewery.services.impl;
 
 import com.dzinevich.brewery.services.BeerService;
 import com.dzinevich.brewery.web.model.BeerDto;
+import com.dzinevich.brewery.web.model.Style;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +16,7 @@ public class BeerServiceImpl implements BeerService {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
                 .name("Angry IPA")
-                .style("IPA")
+                .style(Style.IPA)
                 .build();
     }
 
@@ -23,7 +24,7 @@ public class BeerServiceImpl implements BeerService {
     public BeerDto addNewBeer(BeerDto beerDto) {
         return BeerDto.builder()
                 .id(UUID.randomUUID())
-                .style("Pale ale")
+                .style(Style.PALE_ALE)
                 .build();
     }
 
