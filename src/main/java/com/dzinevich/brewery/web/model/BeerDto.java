@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Data
@@ -12,9 +14,18 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 public class BeerDto {
-
     private UUID id;
+    private Integer version;
+
+    private OffsetDateTime createdOn;
+    private OffsetDateTime lastModifiedOn;
+
     private String name;
-    private String style;
+    private Style style;
+
     private Long upc;
+
+    private BigDecimal price;
+    private Integer quantityOnHand;
 }
+
