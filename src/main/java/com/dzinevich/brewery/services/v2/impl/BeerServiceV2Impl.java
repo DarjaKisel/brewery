@@ -2,7 +2,7 @@ package com.dzinevich.brewery.services.v2.impl;
 
 import com.dzinevich.brewery.services.v2.BeerServiceV2;
 import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
-import com.dzinevich.brewery.web.model.v2.Style;
+import com.dzinevich.brewery.web.model.Style;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

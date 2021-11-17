@@ -1,5 +1,6 @@
 package com.dzinevich.brewery.web.model.v2;
 
+import com.dzinevich.brewery.web.model.Style;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
