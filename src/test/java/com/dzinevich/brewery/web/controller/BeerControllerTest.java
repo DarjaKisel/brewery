@@ -17,6 +17,8 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -61,28 +63,31 @@ class BeerControllerTest {
     @Test
     void addBeer() throws Exception {
         String beerJson = objectMapper.writeValueAsString(newBeer);
-        BeerDtoV2 savedBeer = BeerDtoV2.builder().id(UUID.randomUUID()).name("SavedBeer").build();
 
-        given(beerServiceV2.addNewBeer(newBeer)).willReturn(savedBeer);
+        given(beerServiceV2.addNewBeer(newBeer)).willReturn(newBeer);
 
         mockMvc.perform(post("/v2/beer/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerJson))
                 .andExpect(status().isCreated())
-                .andExpect(header().string("location", "/beer/" + savedBeer.getId().toString()));
+                .andExpect(jsonPath("$.name", is(newBeer.getName())))
+                .andExpect(jsonPath("$.upc", is(newBeer.getUpc())))
+                .andExpect(jsonPath("$.style", is(newBeer.getStyle().name())));
     }
 
     @Test
     void updateBeer() throws Exception {
         String beerJson = objectMapper.writeValueAsString(newBeer);
 
-        var beerId = UUID.randomUUID();
-        doNothing().when(beerServiceV2).updateBeer(beerId, newBeer);
+        given(beerServiceV2.updateBeer(any(UUID.class), eq(newBeer))).willReturn(newBeer);
 
-        mockMvc.perform(put("/v2/beer/" + beerId)
+        mockMvc.perform(put("/v2/beer/" + UUID.randomUUID())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerJson))
-                .andExpect(status().isNoContent());
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.name", is(newBeer.getName())))
+                .andExpect(jsonPath("$.upc", is(newBeer.getUpc())))
+                .andExpect(jsonPath("$.style", is(newBeer.getStyle().name())));
     }
 
     @Test
