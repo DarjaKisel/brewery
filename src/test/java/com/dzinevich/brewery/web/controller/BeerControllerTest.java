@@ -1,7 +1,8 @@
 package com.dzinevich.brewery.web.controller;
 
-import com.dzinevich.brewery.services.BeerService;
-import com.dzinevich.brewery.web.model.BeerDto;
+import com.dzinevich.brewery.services.v2.BeerServiceV2;
+import com.dzinevich.brewery.web.controller.v2.BeerControllerV2;
+import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
 import com.dzinevich.brewery.web.model.Style;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static org.hamcrest.Matchers.is;
@@ -20,7 +22,7 @@ import static org.mockito.Mockito.doNothing;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest({BeerController.class})
+@WebMvcTest({BeerControllerV2.class})
 class BeerControllerTest {
 
     @Autowired
@@ -30,39 +32,40 @@ class BeerControllerTest {
     ObjectMapper objectMapper;
 
     @MockBean
-    BeerService beerService;
+    BeerServiceV2 beerServiceV2;
 
-    BeerDto newBeer;
+    BeerDtoV2 newBeer;
 
     @BeforeEach
     void setUp() {
-        newBeer = BeerDto.builder()
-                .id(UUID.randomUUID())
+        newBeer = BeerDtoV2.builder()
                 .name("BeerBeer")
                 .style(Style.PORTER)
+                .upc(123000000000000067L)
+                .price(BigDecimal.valueOf(11.99))
                 .build();
     }
 
     @Test
     void getBeer() throws Exception {
         var beerId = UUID.randomUUID();
-        given(beerService.getBeerById(beerId)).willReturn(newBeer);
+        given(beerServiceV2.getBeerById(beerId)).willReturn(newBeer);
 
-        mockMvc.perform(get("/beer/" + beerId))
+        mockMvc.perform(get("/v2/beer/" + beerId))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id", is(newBeer.getId().toString())))
+                .andExpect(jsonPath("$.upc", is(newBeer.getUpc())))
                 .andExpect(jsonPath("$.name", is(newBeer.getName())));
     }
 
     @Test
     void addBeer() throws Exception {
         String beerJson = objectMapper.writeValueAsString(newBeer);
-        BeerDto savedBeer = BeerDto.builder().id(UUID.randomUUID()).name("SavedBeer").build();
+        BeerDtoV2 savedBeer = BeerDtoV2.builder().id(UUID.randomUUID()).name("SavedBeer").build();
 
-        given(beerService.addNewBeer(newBeer)).willReturn(savedBeer);
+        given(beerServiceV2.addNewBeer(newBeer)).willReturn(savedBeer);
 
-        mockMvc.perform(post("/beer/")
+        mockMvc.perform(post("/v2/beer/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerJson))
                 .andExpect(status().isCreated())
@@ -73,9 +76,10 @@ class BeerControllerTest {
     void updateBeer() throws Exception {
         String beerJson = objectMapper.writeValueAsString(newBeer);
 
-        doNothing().when(beerService).updateBeer(newBeer.getId(), newBeer);
+        var beerId = UUID.randomUUID();
+        doNothing().when(beerServiceV2).updateBeer(beerId, newBeer);
 
-        mockMvc.perform(put("/beer/" + newBeer.getId())
+        mockMvc.perform(put("/v2/beer/" + beerId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(beerJson))
                 .andExpect(status().isNoContent());
@@ -83,9 +87,10 @@ class BeerControllerTest {
 
     @Test
     void deleteBeer() throws Exception {
-        doNothing().when(beerService).deleteBeer(newBeer.getId());
+        var beerId = UUID.randomUUID();
+        doNothing().when(beerServiceV2).deleteBeer(beerId);
 
-        mockMvc.perform(delete("/beer/" + newBeer.getId()))
+        mockMvc.perform(delete("/v2/beer/" + beerId))
                 .andExpect(status().isNoContent());
     }
 }
