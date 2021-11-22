@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 public class BeerLoader implements CommandLineRunner {
     private static final long UPC_1 = 17500000000038L;
     private static final long UPC_2 = 98100000000038L;
+    private static final long UPC_3 = 82100000000014L;
 
     private final BeerRepository beerRepository;
 
@@ -41,6 +42,15 @@ public class BeerLoader implements CommandLineRunner {
                             .price(BigDecimal.valueOf(4.45))
                             .upc(UPC_2)
                             .qtyToBrew(50)
+                            .build()
+            );
+            beerRepository.save(
+                    Beer.builder()
+                            .beerName("Cat's Favourite")
+                            .beerStyle(Style.SAISON)
+                            .price(BigDecimal.valueOf(4.10))
+                            .upc(UPC_3)
+                            .qtyToBrew(80)
                             .build()
             );
         }

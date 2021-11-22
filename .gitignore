@@ -68,12 +68,13 @@ local.properties
 # Maven
 ######################
 /log/
-*/target/**
+/target/**
 ######################
 # Gradle
 ######################
 .gradle/
 /build/
+/out/
 
 ######################
 # Package Files
