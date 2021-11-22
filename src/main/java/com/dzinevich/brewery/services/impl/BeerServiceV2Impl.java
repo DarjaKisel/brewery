@@ -95,4 +95,15 @@ public class BeerServiceV2Impl implements BeerServiceV2 {
         Beer beer = beerRepository.findById(id).orElseThrow(NotFoundException::new);
         beerRepository.delete(beer);
     }
+
+    @Cacheable(
+            cacheNames = "beerUpcCache",
+            key = "#upc"
+    )
+    @Override
+    public BeerDtoV2 getBeerByUpc(Long upc) {
+        Beer beer = beerRepository.findByUpc(upc).orElseThrow(NotFoundException::new);
+
+        return beerMapper.beerToBeerDto(beer);
+    }
 }

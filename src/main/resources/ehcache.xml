@@ -5,6 +5,7 @@
 
     <cache alias="beerCache" uses-templare="config-cache"/>
     <cache alias="beerListCache" uses-templare="config-cache"/>
+    <cache alias="beerCache" uses-templare="config-cache"/>
 
     <cache-template name="config-cache">
         <expiry>
