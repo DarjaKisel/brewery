@@ -27,18 +27,22 @@ public class BeerControllerV2 {
     public ResponseEntity<BeerPageableList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                       @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                       @RequestParam(value = "beerName", required = false) String name,
-                                                      @RequestParam(value = "beerStyle", required = false) Style style) {
+                                                      @RequestParam(value = "beerStyle", required = false) Style style,
+                                                      @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
+        showInventoryOnHand = Optional.ofNullable(showInventoryOnHand).orElse(false);
         pageNumber = Optional.ofNullable(pageNumber).filter(nr -> nr > 0).orElse(0);
         pageSize = Optional.ofNullable(pageSize).filter(size -> size > 1).orElse(25);
 
-        BeerPageableList beerList = beerServiceV2.getBeerList(name, style, PageRequest.of(pageNumber, pageSize));
+        BeerPageableList beerList = beerServiceV2.getBeerList(name, style, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
 
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID id) {
-        return new ResponseEntity<>(beerServiceV2.getBeerById(id), HttpStatus.OK);
+    public ResponseEntity<BeerDtoV2> getBeerById(@PathVariable("beerId") UUID id,
+                                                 @RequestParam(value = "showInventoryOnHand", required = false) Boolean showInventoryOnHand) {
+        showInventoryOnHand = Optional.ofNullable(showInventoryOnHand).orElse(false);
+        return new ResponseEntity<>(beerServiceV2.getBeerById(id, showInventoryOnHand), HttpStatus.OK);
     }
 
     @PostMapping

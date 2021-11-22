@@ -50,7 +50,7 @@ class BeerControllerTest {
     @Test
     void getBeer() throws Exception {
         var beerId = UUID.randomUUID();
-        given(beerServiceV2.getBeerById(beerId)).willReturn(newBeer);
+        given(beerServiceV2.getBeerById(beerId, false)).willReturn(newBeer);
 
         mockMvc.perform(get("/v2/beer/" + beerId))
                 .andExpect(status().isOk())
