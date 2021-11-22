@@ -1,4 +1,4 @@
-package com.dzinevich.brewery.web.model.v2;
+package com.dzinevich.brewery.web.model;
 
 import com.dzinevich.brewery.web.model.Style;
 import lombok.AllArgsConstructor;
@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -15,7 +16,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class BeerDtoV2 {
+public class BeerDtoV2 implements Serializable {
+    private static final long serialVersionUID = 4540009248496159729L;
     @Null
     private UUID id;
     @Null

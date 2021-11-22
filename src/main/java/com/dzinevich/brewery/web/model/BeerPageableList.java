@@ -1,12 +1,14 @@
 package com.dzinevich.brewery.web.model;
 
-import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class BeerPageableList extends PageImpl<BeerDtoV2> {
+public class BeerPageableList extends PageImpl<BeerDtoV2> implements Serializable {
+    private static final long serialVersionUID = -2204206673028841204L;
+
     public BeerPageableList(List<BeerDtoV2> content, Pageable pageable, long total) {
         super(content, pageable, total);
     }

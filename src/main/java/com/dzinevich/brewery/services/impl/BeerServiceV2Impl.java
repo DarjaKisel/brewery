@@ -7,11 +7,12 @@ import com.dzinevich.brewery.web.exception.NotFoundException;
 import com.dzinevich.brewery.web.mappers.BeerMapper;
 import com.dzinevich.brewery.web.model.BeerPageableList;
 import com.dzinevich.brewery.web.model.Style;
-import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
+import com.dzinevich.brewery.web.model.BeerDtoV2;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -28,11 +29,15 @@ public class BeerServiceV2Impl implements BeerServiceV2 {
     private final BeerRepository beerRepository;
     private final BeerMapper beerMapper;
 
+    @Cacheable(
+            cacheNames = "beerListCache",
+            condition = "#showInventoryOnHand==false"
+    )
     @Override
-    public BeerPageableList getBeerList(String name,
-                                        Style style,
-                                        PageRequest pageRequest,
-                                        boolean showInventoryOnHand) {
+    public BeerPageableList listBeers(String name,
+                                      Style style,
+                                      PageRequest pageRequest,
+                                      boolean showInventoryOnHand) {
         Page<Beer> beerPage;
 
         if (StringUtils.isNotBlank(name) && style != null) {
@@ -54,6 +59,11 @@ public class BeerServiceV2Impl implements BeerServiceV2 {
                 beerPage.getTotalElements());
     }
 
+    @Cacheable(
+            cacheNames = "beerCache",
+            key = "#id",
+            condition = "#showInventoryOnHand==false"
+    )
     @Override
     public BeerDtoV2 getBeerById(UUID id, boolean showInventoryOnHand) {
         Beer beer = beerRepository.findById(id).orElseThrow(NotFoundException::new);

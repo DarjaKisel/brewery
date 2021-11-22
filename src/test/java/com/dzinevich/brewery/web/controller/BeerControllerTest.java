@@ -1,7 +1,7 @@
 package com.dzinevich.brewery.web.controller;
 
 import com.dzinevich.brewery.services.BeerServiceV2;
-import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
+import com.dzinevich.brewery.web.model.BeerDtoV2;
 import com.dzinevich.brewery.web.model.Style;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;

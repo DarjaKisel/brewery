@@ -1,7 +1,7 @@
 package com.dzinevich.brewery.web.mappers;
 
 import com.dzinevich.brewery.domain.Beer;
-import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
+import com.dzinevich.brewery.web.model.BeerDtoV2;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

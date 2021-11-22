@@ -3,7 +3,7 @@ package com.dzinevich.brewery.web.controller;
 import com.dzinevich.brewery.services.BeerServiceV2;
 import com.dzinevich.brewery.web.model.BeerPageableList;
 import com.dzinevich.brewery.web.model.Style;
-import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
+import com.dzinevich.brewery.web.model.BeerDtoV2;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +33,7 @@ public class BeerControllerV2 {
         pageNumber = Optional.ofNullable(pageNumber).filter(nr -> nr > 0).orElse(0);
         pageSize = Optional.ofNullable(pageSize).filter(size -> size > 1).orElse(25);
 
-        BeerPageableList beerList = beerServiceV2.getBeerList(name, style, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
+        BeerPageableList beerList = beerServiceV2.listBeers(name, style, PageRequest.of(pageNumber, pageSize), showInventoryOnHand);
 
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
