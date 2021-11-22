@@ -13,6 +13,9 @@ import java.math.BigDecimal;
 @Component
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BeerLoader implements CommandLineRunner {
+    private static final long UPC_1 = 17500000000038L;
+    private static final long UPC_2 = 98100000000038L;
+
     private final BeerRepository beerRepository;
 
     @Override
@@ -28,7 +31,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(Style.IPA)
                             .price(BigDecimal.valueOf(2.10))
                             .minQtyOnHand(10)
-                            .upc(17500000000038L)
+                            .upc(UPC_1)
                             .qtyToBrew(200)
                             .build()
             );
@@ -38,7 +41,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(Style.GOSE)
                             .price(BigDecimal.valueOf(4.45))
                             .minQtyOnHand(5)
-                            .upc(98100000000038L)
+                            .upc(UPC_2)
                             .qtyToBrew(50)
                             .build()
             );

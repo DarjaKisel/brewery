@@ -1,7 +1,6 @@
 package com.dzinevich.brewery.web.controller;
 
-import com.dzinevich.brewery.services.v2.BeerServiceV2;
-import com.dzinevich.brewery.web.controller.v2.BeerControllerV2;
+import com.dzinevich.brewery.services.BeerServiceV2;
 import com.dzinevich.brewery.web.model.v2.BeerDtoV2;
 import com.dzinevich.brewery.web.model.Style;
 import com.fasterxml.jackson.databind.ObjectMapper;
