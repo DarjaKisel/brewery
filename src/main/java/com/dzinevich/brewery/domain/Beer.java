@@ -4,6 +4,7 @@ import com.dzinevich.brewery.web.model.Style;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -21,7 +22,8 @@ public class Beer {
     @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(length = 36, columnDefinition = "varchar", updatable = false, nullable = false)
+    @Type(type="org.hibernate.type.UUIDCharType")
+    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID beerId;
     @Version
     private Long version;
@@ -33,6 +35,7 @@ public class Beer {
     private Timestamp modifiedOn;
 
     private String beerName;
+    @Enumerated(EnumType.STRING)
     private Style beerStyle;
 
     @Column(unique = true)
