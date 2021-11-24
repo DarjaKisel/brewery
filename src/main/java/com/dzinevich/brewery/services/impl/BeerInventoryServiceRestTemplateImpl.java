@@ -23,7 +23,7 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
     private final String inventoryHostName;
 
     public BeerInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder,
-                                                @Value("${beer-inventory-hostname}") String inventoryHostName) {
+                                                @Value("${beer.inventory-hostname}") String inventoryHostName) {
         this.restTemplate = restTemplateBuilder.build();
         this.inventoryHostName = inventoryHostName;
     }

@@ -1,6 +1,7 @@
 package com.dzinevich.brewery.web.model;
 
 import com.dzinevich.brewery.web.model.Style;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,13 +25,16 @@ public class BeerDtoV2 implements Serializable {
     private Integer version;
 
     @Null
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss:Z", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime createdOn;
     @Null
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss:Z", shape = JsonFormat.Shape.STRING)
     private OffsetDateTime lastModifiedOn;
 
     @NotBlank
     private String name;
     @NotNull
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Style style;
 
     @Positive

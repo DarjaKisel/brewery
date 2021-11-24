@@ -37,6 +37,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(Style.IPA)
                             .price(BigDecimal.valueOf(2.10))
                             .upc(UPC_1)
+                            .minQtyOnHand(50)
                             .qtyToBrew(200)
                             .build()
             );
@@ -47,6 +48,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(Style.GOSE)
                             .price(BigDecimal.valueOf(4.45))
                             .upc(UPC_2)
+                            .minQtyOnHand(20)
                             .qtyToBrew(50)
                             .build()
             );
@@ -57,6 +59,7 @@ public class BeerLoader implements CommandLineRunner {
                             .beerStyle(Style.SAISON)
                             .price(BigDecimal.valueOf(4.10))
                             .upc(UPC_3)
+                            .minQtyOnHand(30)
                             .qtyToBrew(80)
                             .build()
             );

@@ -31,9 +31,11 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-data-jpa"
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-starter-cache"
+    implementation "org.springframework.boot:spring-boot-starter-activemq"
     implementation "javax.cache:cache-api"
     implementation "org.ehcache:ehcache"
     implementation "org.apache.commons:commons-lang3:${apacheCommonsLang3Version}"
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
 
     implementation "org.projectlombok:lombok:${lombokVersion}"
     implementation "org.mapstruct:mapstruct:${mapstructVersion}"
