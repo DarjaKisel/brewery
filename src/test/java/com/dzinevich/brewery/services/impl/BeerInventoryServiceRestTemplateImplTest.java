@@ -1,6 +1,6 @@
 package com.dzinevich.brewery.services.impl;
 
-import com.dzinevich.brewery.services.BeerInventoryService;
+import com.dzinevich.brewery.services.inventory.BeerInventoryService;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

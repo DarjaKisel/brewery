@@ -1,4 +1,4 @@
-package com.dzinevich.brewery.services.model;
+package com.dzinevich.brewery.services.inventory.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

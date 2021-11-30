@@ -3,7 +3,7 @@ package com.dzinevich.brewery.services.brewing.impl;
 import com.dzinevich.brewery.config.JmsConfig;
 import com.dzinevich.brewery.events.BrewBeerEvent;
 import com.dzinevich.brewery.repositories.BeerRepository;
-import com.dzinevich.brewery.services.BeerInventoryService;
+import com.dzinevich.brewery.services.inventory.BeerInventoryService;
 import com.dzinevich.brewery.services.brewing.BrewingService;
 import com.dzinevich.brewery.web.mappers.BeerMapper;
 import lombok.RequiredArgsConstructor;

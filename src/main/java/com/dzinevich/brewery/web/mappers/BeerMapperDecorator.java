@@ -1,7 +1,7 @@
 package com.dzinevich.brewery.web.mappers;
 
 import com.dzinevich.brewery.domain.Beer;
-import com.dzinevich.brewery.services.BeerInventoryService;
+import com.dzinevich.brewery.services.inventory.BeerInventoryService;
 import com.dzinevich.brewery.web.model.BeerDtoV2;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;

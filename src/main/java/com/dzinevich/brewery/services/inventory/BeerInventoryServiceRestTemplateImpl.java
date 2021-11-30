@@ -1,10 +1,10 @@
-package com.dzinevich.brewery.services.impl;
+package com.dzinevich.brewery.services.inventory;
 
-import com.dzinevich.brewery.services.BeerInventoryService;
-import com.dzinevich.brewery.services.model.BeerInventoryDto;
+import com.dzinevich.brewery.services.inventory.model.BeerInventoryDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +14,11 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * @Deprecated use {@link InventoryServiceClient} instead
+ */
+@Deprecated
+@Profile("!local-discovery")
 @Slf4j
 @Component
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService {
