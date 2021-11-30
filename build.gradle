@@ -19,6 +19,7 @@ repositories {
 }
 
 ext {
+    springCloudVersion = "2020.0.4"
     mapstructVersion = '1.4.2.Final'
     lombokVersion = '1.18.20'
     lombokMapstructBindingVersion = '0.2.0'
@@ -32,6 +33,7 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-starter-validation"
     implementation "org.springframework.boot:spring-boot-starter-cache"
     implementation "org.springframework.boot:spring-boot-starter-activemq"
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
     implementation "javax.cache:cache-api"
     implementation "org.ehcache:ehcache"
     implementation "org.apache.commons:commons-lang3:${apacheCommonsLang3Version}"
@@ -52,6 +54,12 @@ dependencies {
     testImplementation "org.junit.jupiter:junit-jupiter-api"
     testImplementation "org.junit.jupiter:junit-jupiter-engine"
     testImplementation "org.mockito:mockito-junit-jupiter"
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
 }
 
 test {
